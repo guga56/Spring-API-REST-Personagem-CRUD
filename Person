@@ -1,0 +1,79 @@
+package com.gusatvo.person.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
+import java.util.Date;
+import javax.validation.constraints.NotBlank;
+
+/**
+ * Created by gmartinezramirez on 01/03/18.
+ */
+
+// TODO (gmartinezramirez): create a interface for this.
+@Entity
+@Table(name = "persons")
+@EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
+		allowGetters = true)
+public class Person {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
+	@NotBlank
+	private String nome;
+
+	@NotBlank
+	private String genero;
+
+	@Column(nullable = false, updatable = false)
+	private Boolean died;
+
+	@Column(nullable = false)
+	private String seansons;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+      
+	public Booulean getDied() {
+		return died;
+	}
+      
+      public void setDied(Boolean died) {
+		this.died = died;
+	}
+
+      public String setSeansons(Boolean seansons) {
+		this.seansons = seansons;
+	}
+
+     
+	public void setSeasons(String seasons) {
+		this.seasons = seasons;
+	}
+}
